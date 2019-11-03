@@ -1,1 +1,40 @@
 <!--차용증 작성 페이지-->
+<h1>차용증 작성하기</h1>
+<!--action 경로 바꾸기-->
+<form action="/process_create" method="post">
+    <h3>1. 채권자 정보</h3>
+    <p>
+        <h4>1) 주소</h4>
+         <ul>
+         <li>우편번호: <input type="text" name="credit_post1" > - <input type="text" name="credit_post2" > <br>
+         </li>
+         <li>주소: <input type="text" name="credit_addr" placeholder=" 도로명 주소"> </li>
+        </ul>
+        <h4> 2) 이름</h4> 
+        <input type="text" name="credit_name" placeholder="채권자 이름"><br>
+        
+        <h4> 3) 주민등록번호 </h4><input type="text" name="credit_num1"> - <input type="text" name="credit_num2" ><br>
+        <h4>4) 연락처 </h4><input type="text" name="credit_phone" placeholder="010-1234-5678"><br>
+        <h4>5) 지갑 키</h4> <input type="text" name="credit_key" placeholder="채권자"><br>
+    </p>
+
+    <h3>2. 채무자 정보</h3>
+    <p>
+        <h4>1) 주소</h4>
+         <ul>
+         <li>우편번호: <input type="text" name="debtor_post1" > - <input type="text" name="debtor_post2" > <br>
+         </li>
+         <li>주소: <input type="text" name="debtor_addr" placeholder=" 도로명 주소"> </li>
+        </ul>
+        <h4> 2) 이름</h4> 
+        <input type="text" name="debtor_name" placeholder="채권자 이름"><br>
+        
+        <h4> 3) 주민등록번호 </h4><input type="text" name="debtor_num1"> - <input type="text" name="debtor_num2" ><br>
+        <h4>4) 연락처 </h4><input type="text" name="debtor_phone" placeholder="010-1234-5678"><br>
+        <h4>5) 지갑 키</h4> <input type="text" name="debtor_key"><br>
+    </p>
+    
+    <p>
+        <input type="submit" value="다음">
+    </p>
+</form>
