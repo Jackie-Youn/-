@@ -1,7 +1,7 @@
 var http = require('http');
 var url = require('url');
 var qs = require('querystring');
-
+var template = require('template.js');
 //http://jaeyunkim.com/lockable-smart-contract-4/
 var Web3 = require(web3);
 var web3 = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:8545"));
@@ -16,16 +16,10 @@ var app = http.createServer(function(request,respose){
 
     if(pathname === '/'){
         if(queryData.id == undefined){ //main page
-   
-           fs.readdir('./data', function(error, filelist){
-             var title = 'welcome';
-             var description = 'Hello, Node.js';
-             var list = template.list(filelist);
-             var html = template.HTML(title, list, `<h2>${title}</h2><p>${description}</p>`,`<a href="/create">Create</a>`);
-   
-             response.writeHead(200); //정상적으로 값 return
-             response.end(html); //end 함수를 통해 컨텐츠를 브라우저에 전달
-           })
+          html = template.HTML()//-----------------
+
+          response.writeHead(200); //정상적으로 값 return
+          response.end(html); //end 함수를 통해 컨텐츠를 브라우저에 전달
    
         }
         else{
