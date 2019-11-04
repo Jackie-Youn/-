@@ -1,0 +1,45 @@
+<h1>차용증 작성하기</h1>
+<!--action 경로 바꾸기-->
+<form action="/process_create" method="post">
+    <h3>3. 차용증 내용</h3>
+    <p>
+        <h4> 1) 차용액</h4> 
+           금 <input type="text" name="money"> 원
+        
+        <h4> 2) 변제기한 </h4> 
+         <input type="text" name="year"> 년 
+         <input type="text" name="month"> 월 
+         <input type="text" name="date"> 일 
+        
+        <h4> 3) 변제 방법 </h4> 
+          <p>
+                <textarea name="payback" placeholder="채무액 변제 방법 작성
+(예시) 채권자 주소지에 지참하여 변제 
+채권자 명의 계좌에 송금"></textarea>
+          </p>  
+
+        <h4> 4) 이자율 </h4>
+        연 <input type="text" name="interest_rate">% 
+        <h4>5) 이자 지급방법 </h4>
+        <p>
+                <textarea name="interest_payback" placeholder="이자 지급법 작성
+(예시) 매월 이자를 채권자 명의 계좌에 송금한다.
+원금 변제 시 함께 지급한다."></textarea>
+            </p>
+        <h4>6) 기타 </h4>
+        <p>
+                <textarea name="exception" placeholder="변제하지 않을 경우의 불이익 및 기타 계약 조건 작성
+                
+(예시) 변제일에 정해진 방법으로 원금 및 이자액을 변제하지 않을 경우 
+위약금 __원을 변제일이 지난 후 한 달 내에 추가로 지불한다.
+변제일에 정해진 방법으로 원금 및 이자액을 변제하지 않을 경우 실제 변제하는 날까지 변제일 이후 추가 일수에 대해서는 이자율 --%를 적용한다."></textarea>
+            </p>
+            
+    </p>
+
+    <p>
+        <input type="submit" value="작성 완료">
+    </p>
+    <!--작성 완료 시 내용을 해시로 변환해서 반환-->
+</form>
+

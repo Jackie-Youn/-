@@ -2,7 +2,6 @@ var template ={
     HTML: function (body){
       return `
       <!DOCTYPE html>
-      <html lang="en">
       
       <head>
       
@@ -27,15 +26,15 @@ var template ={
       
           <!-- Sidebar -->
           <div class="bg-light border-right" id="sidebar-wrapper">
-            <div class="sidebar-heading"><a href = 'index.html' style="text-decoration:none">서비스명</a></div>
+            <div class="sidebar-heading"><a href = '/' style="text-decoration:none">서비스명</a></div>
             <div class="list-group list-group-flush">
-              <a href="#" class="list-group-item list-group-item-action bg-light" style= "font-weight:bold">서비스 이용 방법</a>
-              <a href="#" class="list-group-item list-group-item-action bg-light">     - 서비스 안내</a>
-              <a href="#" class="list-group-item list-group-item-action bg-light">     - 지갑 만들기</a>
-              <a href="#" class="list-group-item list-group-item-action bg-light">     - 차용증 작성</a>
-              <a href="#" class="list-group-item list-group-item-action bg-light">     - 차용증 확인</a>
-              <a href="#" class="list-group-item list-group-item-action bg-light" style= "font-weight:bold">차용증 작성</a>
-              <a href="#" class="list-group-item list-group-item-action bg-light" style= "font-weight:bold">차용증 확인</a>
+              <a href="/?id=explainBody" class="list-group-item list-group-item-action bg-light" style= "font-weight:bold">서비스 이용 방법</a>
+              <a href="/?id=explainBody" class="list-group-item list-group-item-action bg-light">     - 서비스 안내</a>
+              <a href="/?id=explainBody2" class="list-group-item list-group-item-action bg-light">     - 지갑 만들기</a>
+              <a href="/?id=explainBody3" class="list-group-item list-group-item-action bg-light">     - 차용증 작성법</a>
+              <a href="/?id=explainBody4" class="list-group-item list-group-item-action bg-light">     - 차용증 확인법</a>
+              <a href="/?id=writeNote" class="list-group-item list-group-item-action bg-light" style= "font-weight:bold">차용증 작성</a>
+              <a href="/?id=checkNote" class="list-group-item list-group-item-action bg-light" style= "font-weight:bold">차용증 확인</a>
               
             </div>
           </div>
@@ -54,7 +53,7 @@ var template ={
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
                   <li class="nav-item active">
-                    <a class="nav-link" href='index.html'>Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href='/'>Home <span class="sr-only">(current)</span></a>
                   </li>
                 </ul>
               </div>

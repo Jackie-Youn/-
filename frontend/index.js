@@ -19,24 +19,18 @@ var app = http.createServer(function(request,response){
 
     if(pathname === '/'){
         if(queryData.id == undefined){ //main page
-         /* 
-          fs.readFile(`./pages/home.html`, "utf8", function(err, description){
+         
+          fs.readFile(`pages/home.html`, "utf8", function(err, description){
             var html = template.HTML(`${description}`);
           
             response.writeHead(200); //정상적으로 값 return
             response.end(html); //end 함수를 통해 컨텐츠를 브라우저에 전달
    
           })
-          */
-         fs.readFile(`./index.hteml`, "utf8", function(err,description){
-          var html = `${description}`;
-          response.writeHead(200);
-          response.end(html);
-         })
           
         }
         else{
-           fs.readFile(`./pages/${queryData.id}`, "utf8", function(err, description) {
+           fs.readFile(`pages/${queryData.id}`, "utf8", function(err, description) {
              var html = template.HTML(`${description}`);
              response.writeHead(200);
              response.end(html);
