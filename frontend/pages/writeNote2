@@ -1,40 +1,45 @@
-<!--차용증 작성 페이지-->
 <h1>차용증 작성하기</h1>
 <!--action 경로 바꾸기-->
-<form action="/?id=writeNote2" method="post">
-    <h3>1. 채권자 정보</h3>
+<form action="/create_note" method="post">
+    <h3>3. 차용증 내용</h3>
     <p>
-        <h4>1) 주소</h4>
-         <ul>
-         <li>우편번호: <input type="text" name="credit_post1" > - <input type="text" name="credit_post2" > <br>
-         </li>
-         <li>주소: <input type="text" name="credit_addr" placeholder=" 도로명 주소"> </li>
-        </ul>
-        <h4> 2) 이름</h4> 
-        <input type="text" name="credit_name" placeholder="채권자 이름"><br>
+        <h4> 1) 차용액</h4> 
+           금 <input type="text" name="money"> 원
         
-        <h4> 3) 주민등록번호 </h4><input type="text" name="credit_num1"> - <input type="text" name="credit_num2" ><br>
-        <h4>4) 연락처 </h4><input type="text" name="credit_phone" placeholder="010-1234-5678"><br>
-        <h4>5) 지갑 키</h4> <input type="text" name="credit_key" placeholder="채권자"><br>
+        <h4> 2) 변제기한 </h4> 
+         <input type="text" name="year"> 년 
+         <input type="text" name="month"> 월 
+         <input type="text" name="date"> 일 
+        
+        <h4> 3) 변제 방법 </h4> 
+          <p>
+                <textarea cols="70" rows="10" name="payback" placeholder="채무액 변제 방법 작성
+(예시) 채권자 주소지에 지참하여 변제 
+채권자 명의 계좌에 송금"></textarea>
+          </p>  
+
+        <h4> 4) 이자율 </h4>
+        연 <input type="text" name="interest_rate">% 
+        <h4>5) 이자 지급방법 </h4>
+        <p>
+                <textarea cols="70" rows="10" name="interest_payback" placeholder="이자 지급법 작성
+(예시) 매월 이자를 채권자 명의 계좌에 송금한다.
+원금 변제 시 함께 지급한다."></textarea>
+            </p>
+        <h4>6) 기타 </h4>
+        <p>
+                <textarea cols="70" rows="10" name="exception" placeholder="변제하지 않을 경우의 불이익 및 기타 계약 조건 작성
+                
+(예시) 변제일에 정해진 방법으로 원금 및 이자액을 변제하지 않을 경우 
+위약금 __원을 변제일이 지난 후 한 달 내에 추가로 지불한다.
+변제일에 정해진 방법으로 원금 및 이자액을 변제하지 않을 경우 실제 변제하는 날까지 변제일 이후 추가 일수에 대해서는 이자율 --%를 적용한다."></textarea>
+            </p>
+            
     </p>
 
-    <h3>2. 채무자 정보</h3>
     <p>
-        <h4>1) 주소</h4>
-         <ul>
-         <li>우편번호: <input type="text" name="debtor_post1" > - <input type="text" name="debtor_post2" > <br>
-         </li>
-         <li>주소: <input type="text" name="debtor_addr" placeholder=" 도로명 주소"> </li>
-        </ul>
-        <h4> 2) 이름</h4> 
-        <input type="text" name="debtor_name" placeholder="채권자 이름"><br>
-        
-        <h4> 3) 주민등록번호 </h4><input type="text" name="debtor_num1"> - <input type="text" name="debtor_num2" ><br>
-        <h4>4) 연락처 </h4><input type="text" name="debtor_phone" placeholder="010-1234-5678"><br>
-        <h4>5) 지갑 키</h4> <input type="text" name="debtor_key"><br>
+        <input type="submit" value="작성 완료">
     </p>
-    
-    <p>
-        <input type="submit" value="다음">
-    </p>
+    <!--작성 완료 시 내용을 해시로 변환해서 반환-->
 </form>
+

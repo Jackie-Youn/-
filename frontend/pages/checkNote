@@ -2,3 +2,18 @@
 <!-- 1) 이더리움 상에 존재하는 해시 가져오기
      2) 원본 차용증과 해시가 일치하는 지 확인하기
  -->
+
+ <form action="/check_note" method="post">
+    <h3>확정된 차용증 확인</h3>
+    <p>
+       1. 차용증 해시값 : <input type="text" name="note_hash" placeholder="차용증 해시값" default="0"> <br>
+    </p>
+    <p>
+        2. 차용증 내용 :<br>
+          <textarea cols="50" rows="10" class="noresize" name="note_info" placeholder="작성 후 받은 차용증 내용을 복사해서 넣어주세요."></textarea>
+    </p>
+    <p>
+        <input type="submit" value="확인하기">
+    </p>
+    
+</form>

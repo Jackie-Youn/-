@@ -1,6 +1,6 @@
 <h1>차용증 작성하기</h1>
 <!--action 경로 바꾸기-->
-<form action="/process_create" method="post">
+<form action="/create_note" method="post">
     <h3>3. 차용증 내용</h3>
     <p>
         <h4> 1) 차용액</h4> 
@@ -13,7 +13,7 @@
         
         <h4> 3) 변제 방법 </h4> 
           <p>
-                <textarea name="payback" placeholder="채무액 변제 방법 작성
+                <textarea cols="70" rows="10" name="payback" placeholder="채무액 변제 방법 작성
 (예시) 채권자 주소지에 지참하여 변제 
 채권자 명의 계좌에 송금"></textarea>
           </p>  
@@ -22,13 +22,13 @@
         연 <input type="text" name="interest_rate">% 
         <h4>5) 이자 지급방법 </h4>
         <p>
-                <textarea name="interest_payback" placeholder="이자 지급법 작성
+                <textarea cols="70" rows="10" name="interest_payback" placeholder="이자 지급법 작성
 (예시) 매월 이자를 채권자 명의 계좌에 송금한다.
 원금 변제 시 함께 지급한다."></textarea>
             </p>
         <h4>6) 기타 </h4>
         <p>
-                <textarea name="exception" placeholder="변제하지 않을 경우의 불이익 및 기타 계약 조건 작성
+                <textarea cols="70" rows="10" name="exception" placeholder="변제하지 않을 경우의 불이익 및 기타 계약 조건 작성
                 
 (예시) 변제일에 정해진 방법으로 원금 및 이자액을 변제하지 않을 경우 
 위약금 __원을 변제일이 지난 후 한 달 내에 추가로 지불한다.
