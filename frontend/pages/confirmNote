@@ -3,6 +3,7 @@
     <h3>차용증 확정하기</h3>
     <p>
        차용증 해시값 : <input type="text" name="note_hash" placeholder="차용증 해시값" default="0"> <br>
+       내 지갑 키: <input type="text" name="key" placeholder="지갑키">
     </p>
     <p>
         <input type="submit" value="확정하기">

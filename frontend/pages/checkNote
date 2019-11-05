@@ -6,14 +6,16 @@
  <form action="/check_note" method="post">
     <h3>확정된 차용증 확인</h3>
     <p>
-       1. 차용증 해시값 : <input type="text" name="note_hash" placeholder="차용증 해시값" default="0"> <br>
+        1. 개인 키 : <input type="text" name="key" placeholder="본인의 키" default="0"> <br>
+        2. 차용증 해시값 : <input type="text" name="note_hash" placeholder="차용증 해시값" default="0"> <br>
     </p>
     <p>
         2. 차용증 내용 :<br>
-          <textarea cols="50" rows="10" class="noresize" name="note_info" placeholder="작성 후 받은 차용증 내용을 복사해서 넣어주세요."></textarea>
+          <textarea cols="30" rows="10" class="noresize" name="note_info" placeholder="작성 후 받은 차용증 내용을 복사해서 넣어주세요."></textarea>
     </p>
     <p>
         <input type="submit" value="확인하기">
     </p>
     
 </form>
+<!--차용증 해시값이 존재하는지 확인, 내용이 일치하는 지 확인 후 결과 값 출력-->
