@@ -17,9 +17,9 @@ var promissoryContract = new web3.eth.Contract([
 		"constant": true,
 		"inputs": [
 			{
-				"internalType": "address",
+				"internalType": "bytes32",
 				"name": "_hash",
-				"type": "address"
+				"type": "bytes32"
 			}
 		],
 		"name": "check_note",
@@ -35,6 +35,47 @@ var promissoryContract = new web3.eth.Contract([
 		"type": "function"
 	},
 	{
+		"constant": true,
+		"inputs": [
+			{
+				"internalType": "bytes32",
+				"name": "",
+				"type": "bytes32"
+			}
+		],
+		"name": "notes",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "creditor_addr",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "debtor_addr",
+				"type": "address"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "note_hash",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "bool",
+				"name": "creditor_confirmed",
+				"type": "bool"
+			},
+			{
+				"internalType": "bool",
+				"name": "debtor_confirmed",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"constant": false,
 		"inputs": [
 			{
@@ -43,9 +84,9 @@ var promissoryContract = new web3.eth.Contract([
 				"type": "address"
 			},
 			{
-				"internalType": "address",
+				"internalType": "bytes32",
 				"name": "_hash",
-				"type": "address"
+				"type": "bytes32"
 			}
 		],
 		"name": "confirm_note",
@@ -68,56 +109,15 @@ var promissoryContract = new web3.eth.Contract([
 				"type": "address"
 			},
 			{
-				"internalType": "address",
+				"internalType": "bytes32",
 				"name": "_hash",
-				"type": "address"
+				"type": "bytes32"
 			}
 		],
 		"name": "create_note",
 		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "notes",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "creditor_addr",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "debtor_addr",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "note_hash",
-				"type": "address"
-			},
-			{
-				"internalType": "bool",
-				"name": "creditor_confirmed",
-				"type": "bool"
-			},
-			{
-				"internalType": "bool",
-				"name": "debtor_confirmed",
-				"type": "bool"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -137,9 +137,9 @@ var promissoryContract = new web3.eth.Contract([
 			},
 			{
 				"indexed": false,
-				"internalType": "address",
+				"internalType": "bytes32",
 				"name": "_hash",
-				"type": "address"
+				"type": "bytes32"
 			}
 		],
 		"name": "logNewNote",
@@ -156,16 +156,16 @@ var promissoryContract = new web3.eth.Contract([
 			},
 			{
 				"indexed": false,
-				"internalType": "address",
+				"internalType": "bytes32",
 				"name": "_hash",
-				"type": "address"
+				"type": "bytes32"
 			}
 		],
 		"name": "logConfirmed",
 		"type": "event"
 	}
 ]);
-promissoryContract.options.address = "0x8c9C860c3F98e23D4002af5BA34c32e5E7eFB130";
+promissoryContract.options.address = "0xb94baB99431988Ea4f7Ce6DF9DCb2Fb0e4aF04a3";
 promissoryContract.options.gasPrice = '200000000000'; // default gas price in wei
 promissoryContract.options.gas = 500000;
 
@@ -209,15 +209,16 @@ var app = http.createServer(function(request,response){
         request.on('end', function(){
             var post = qs.parse(body); //입력받은 data 전달
             var text = template.Filecreation(post); //전체 내용 하나의 줄글로 정리
-            
+            console.log(text);
             var creditor = post.credit_key;
             var debtor = post.debtor_key;
             var _hash = crypto.createHash('sha256').update(text).digest('hex'); 
             var note_hash = '0x';
-            note_hash = note_hash.concat(_hash);
+			note_hash = note_hash.concat(_hash);
+			var change = new String(note_hash);
             console.log(note_hash);
             promissoryContract.options.from = creditor;
-            promissoryContract.methods.create_note(creditor, debtor, note_hash).send();
+            promissoryContract.methods.create_note(creditor, debtor, change.valueOf()).send();
             
             var html = template.TEXT(`<ul> <li><h3>차용증 내용</h3></li>${text}<br> <li><h3>차용증 해시</h3></li>     ${note_hash}<br> </ul>`);
             response.writeHead(200); //정상적으로 값 return
@@ -264,21 +265,24 @@ var app = http.createServer(function(request,response){
 		var _hash = post.note_hash;
         var content = post.note_info;
         var note_hash = crypto.createHash('sha256').update(content).digest('hex'); 
-        var new_hash = '0x';
+		var new_hash = '0x';
 		new_hash = new_hash.concat(note_hash);
-
+		console.log(new_hash);
+		
 		var result = 0x0;
 		promissoryContract.options.from = key;
 		result = promissoryContract.methods.check_note(_hash).send();
-		if(result == address(0) ||new_hash != _hash){
+		if( result != _hash){
 			var html = template.HTML(`<h2>존재하지 않는 차용증입니다.</h2>`);
-          
+			console.log(_hash);
+		  
+			console.log(result);
             response.writeHead(200); //정상적으로 값 return
             response.end(html);
 		}
-        if(new_hash == _hash){
+        if( result == _hash){
           var html = template.HTML(`<p>해당 내용의 차용증이 존재합니다.<br>`);
-          
+		 
             response.writeHead(200); //정상적으로 값 return
             response.end(html);
         }

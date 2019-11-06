@@ -43,13 +43,14 @@ var template ={
     Filecreation: function (post){
       var text ='';
       
-      var type = ['채권자 정보 -- 우편번호: ','-', ' | 주소: ', ' | 이름: ', ' | 주민등록번호: ', ' - ', ' | 핸드폰 번호: ', ' | 개인 키: ',  '| 채무자 정보 -- 우편번호: ','-', ' | 주소: ', ' | 이름: ', ' | 주민등록번호: ', ' - ', ' | 핸드폰 번호:', ' | 개인 키: ', ' | 차용액: ',' | 변제 일: ', '년 ', '월 ', '일', ' | 변제방법: ', ' | 이자율: ', '% | 이자 지급방법: ', ' | 기타조건: '];
+      var type = ['채권자 정보 -- 우편번호: ','-', ' | 주소: ', ' | 이름: ', ' | 주민등록번호: ', ' - ', ' | 핸드폰 번호: ', ' | 개인 키: ',  ' | 채무자 정보 -- 우편번호: ','-', ' | 주소: ', ' | 이름: ', ' | 주민등록번호: ', ' - ', ' | 핸드폰 번호:', ' | 개인 키: ', ' | 차용액: ',' | 변제 일: ', '년 ', '월 ', '일', ' | 변제방법: ', ' | 이자율: ', '% | 이자 지급방법: ', ' | 기타조건: '];
       var name = ['credit_post1', 'credit_post2', 'credit_addr', 'credit_name', 'credit_num1','credit_num2','credit_phone', 'credit_key', 'debtor_post1',  'debtor_post2','debtor_addr', 'debtor_name', 'debtor_num1', 'debtor_num2', 'debtor_phone', 'debtor_key','money','year','month','date', 'payback','interest_rate', 'interest_payback','exception'];
 
-      for(var i = 0; i < 24; i++){
+      for(var i = 0; i < 25; i++){
         text = text + type[i];
-        if(i<19) text = text + post[name[i]];
-        else if(i >19) text+post[name[i-1]];
+        if(i<20) text = text + post[name[i]];
+        else if(i >20) text = text + post[name[i-1]];
+        else if(i>24) continue;
       }
       
       return text;

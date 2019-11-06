@@ -5,18 +5,18 @@ contract Promissory{
     struct Promissory_note {
         address creditor_addr;
         address debtor_addr;
-        address note_hash;
+        bytes32 note_hash;
         bool creditor_confirmed;
         bool debtor_confirmed;
     }
     
-    mapping(address => Promissory_note) public notes;
+    mapping(bytes32 => Promissory_note) public notes;
     
-    event logNewNote(address creditor, address debtor, address _hash);
-    event logConfirmed(address sender, address _hash);
+    event logNewNote(address creditor, address debtor, bytes32 _hash);
+    event logConfirmed(address sender, bytes32 _hash);
     
     
-    function create_note(address creditor, address debtor, address _hash) public {
+    function create_note(address creditor, address debtor, bytes32 _hash) public {
         //require(msg.sender != address(0));
         //require(debtor != address(0));
         Promissory_note storage newNote = notes[_hash];
@@ -26,12 +26,12 @@ contract Promissory{
         emit logNewNote(creditor, debtor, _hash);
     }
     
-    function confirm_note(address sender, address _hash) public{
+    function confirm_note(address sender, bytes32 _hash) public{
         if(notes[_hash].creditor_addr == sender && notes[_hash].creditor_confirmed == false){
             //require(notes[creditor].creditor_confirmed == false);
             notes[_hash].creditor_confirmed = true;
         }
-        else if(notes[_hash].debtor_addr == sender && notes[_hash].creditor_confirmed == false){
+        else if(notes[_hash].debtor_addr == sender && notes[_hash].debtor_confirmed == false){
             //require(notes[creditor].creditor_confirmed == false);
             notes[_hash].debtor_confirmed = true;
         }
@@ -40,7 +40,7 @@ contract Promissory{
         }
     }
     
-    function check_note(address _hash) public view returns (address number){
+    function check_note(bytes32 _hash) public view returns (address number){
         //require(creditor != address(0));
         //require(debtor != address(0));
         if(notes[_hash].creditor_addr == address(0)) number = address(0);

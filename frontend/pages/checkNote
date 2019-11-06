@@ -11,7 +11,7 @@
     </p>
     <p>
         2. 차용증 내용 :<br>
-          <textarea cols="30" rows="10" class="noresize" name="note_info" placeholder="작성 후 받은 차용증 내용을 복사해서 넣어주세요."></textarea>
+          <textarea name="note_info" placeholder="작성 후 받은 차용증 내용을 복사해서 넣어주세요."></textarea>
     </p>
     <p>
         <input type="submit" value="확인하기">
