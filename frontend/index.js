@@ -209,14 +209,14 @@ var app = http.createServer(function(request,response){
         request.on('end', function(){
             var post = qs.parse(body); //입력받은 data 전달
             var text = template.Filecreation(post); //전체 내용 하나의 줄글로 정리
-            console.log(text);
             var creditor = post.credit_key;
             var debtor = post.debtor_key;
-            var _hash = crypto.createHash('sha256').update(text).digest('hex'); 
+			
+			var _hash = crypto.createHash('sha256').update(text).digest('hex'); 
             var note_hash = '0x';
 			note_hash = note_hash.concat(_hash);
 			var change = new String(note_hash);
-            console.log(note_hash);
+ 
             promissoryContract.options.from = creditor;
             promissoryContract.methods.create_note(creditor, debtor, change.valueOf()).send();
             
@@ -258,7 +258,7 @@ var app = http.createServer(function(request,response){
           request.connection.destroy();
         }
       });
-	  console.log(body);
+
       request.on('end', function(){
         var post = qs.parse(body);
 		var key = post.key;
@@ -267,23 +267,20 @@ var app = http.createServer(function(request,response){
         var note_hash = crypto.createHash('sha256').update(content).digest('hex'); 
 		var new_hash = '0x';
 		new_hash = new_hash.concat(note_hash);
-		console.log(new_hash);
 		
 		var result = 0x0;
 		promissoryContract.options.from = key;
 		result = promissoryContract.methods.check_note(_hash).send();
 		if( result != _hash){
 			var html = template.HTML(`<h2>존재하지 않는 차용증입니다.</h2>`);
-			console.log(_hash);
-		  
-			console.log(result);
+
             response.writeHead(200); //정상적으로 값 return
             response.end(html);
 		}
         if( result == _hash){
-          var html = template.HTML(`<p>해당 내용의 차용증이 존재합니다.<br>`);
+          	var html = template.HTML(`<p>해당 내용의 차용증이 존재합니다.<br>`);
 		 
-            response.writeHead(200); //정상적으로 값 return
+        	response.writeHead(200); //정상적으로 값 return
             response.end(html);
         }
       })
