@@ -14,7 +14,7 @@ contract Promissory{
     
     event logNewNote(address creditor, address debtor, bytes32 _hash);
     event logConfirmed(address sender, bytes32 _hash);
-    
+    event LogNoteExist(bytes32 _hash, int confirmed);
     
     function create_note(address creditor, address debtor, bytes32 _hash) public {
         //require(msg.sender != address(0));
@@ -40,16 +40,29 @@ contract Promissory{
         }
     }
     
-    function check_note(bytes32 _hash) public view returns (address number){
+    function check_note(bytes32 _hash) public{
         //require(creditor != address(0));
         //require(debtor != address(0));
-        if(notes[_hash].creditor_addr == address(0)) number = address(0);
+        if(notes[_hash].creditor_addr == address(0)) emit LogNoteExist(0, 0);
         else{
-            if(notes[_hash].creditor_addr == address(0)) number = address(0);
-            if(notes[_hash].debtor_addr == address(0)) number = address(0);
-            if(notes[_hash].creditor_confirmed && notes[_hash].debtor_confirmed) number = notes[_hash].debtor_addr;
-            else number = address(0);
+            if(notes[_hash].debtor_addr == address(0)) emit LogNoteExist(0, 0);
+            if(notes[_hash].creditor_confirmed && notes[_hash].debtor_confirmed) emit LogNoteExist(_hash, 1);
+            else emit LogNoteExist(_hash, 0);
         }
     }
+    
+     /**return이 아니라 event를 사용해야 함. */
+/**
+   function check_note(bytes32 _hash) public view returns (int number){
+        //require(creditor != address(0));
+        //require(debtor != address(0));
+        if(notes[_hash].creditor_addr == address(0)) number = 0;
+        else{
+            if(notes[_hash].debtor_addr == address(0)) number = 0;
+            if(notes[_hash].creditor_confirmed && notes[_hash].debtor_confirmed) number = 1;
+            else number = 0;
+        }
+    } //return이 아니라 event를 사용해야 함.
+ */
     
 }

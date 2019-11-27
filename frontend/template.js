@@ -92,6 +92,7 @@ var template ={
             <div style=" margin:10px; border: 1px solid black; padding: 10px; height: auto; min-height: 600px; overflow: auto;">
             
             ${body}
+            
             <br> <br>
             *** 위의 내용은 차용증에 포함된 내용과 차용증 해시입니다.<br> 추후 변제받지 못하였을 시 차용증이 작성되었는 지 확인하기 위해 필요한 내용이오니 차용증 내용과 해시를 별도로 워드/텍스트 파일의 형태로 저장해두시길 바랍니다. 
            </div>
